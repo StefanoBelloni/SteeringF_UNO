@@ -130,7 +130,7 @@ class _StateFullButton:
     def is_pressed(self): return self._is_pressed
 
 
-class _ArduinoState:
+class ArduinoStateBase:
     def __init__(self, filename=None):
         self._filename = os.path.expanduser('~/.joystic_configuration') if filename is None else filename
         self._currentAnalogState = _AnalogState()
@@ -203,21 +203,21 @@ class _ArduinoState:
     def is_btn_left_pressed(self): return self._btn_left.is_pressed
 
     def __str__(self):
-        return (f'S:{self.get_steer():.2f}({self.get_raw_steer():.2f});' + 
-                f'T:{self.get_throttle():.2f}({self.get_raw_throttle():.2f});' + 
-                f'B:{self.get_break():.2f}({self.get_raw_break():.2f});' + 
-                f'A:{self.get_acceleration():.2f};' + 
-                f'Gu:{self.is_gear_up_pressed()};' + 
+        return (f'S:{self.get_steer():.2f}({self.get_raw_steer():.2f});'
+                f'T:{self.get_throttle():.2f}({self.get_raw_throttle():.2f});'
+                f'B:{self.get_break():.2f}({self.get_raw_break():.2f});'
+                f'A:{self.get_acceleration():.2f};' 
+                f'Gu:{self.is_gear_up_pressed()};' 
                 f'Gd:{self.is_gear_down_pressed()};'
-                f'L:{self.is_btn_left_pressed()};' + 
+                f'L:{self.is_btn_left_pressed()};'
                 f'R:{self.is_btn_right_pressed()}'
             )
 
-class ArduinoStateV1(_ArduinoState):
+class ArduinoStateV1(ArduinoStateBase):
     def update_from_line(self, line):
         steer, break_value, throttle_value, gear_up, gear_down = line.decode('ascii').strip().split(';')
-        return super().update_from_line(steer, break_value, throttle_value, gear_up, gear_down)
+        return super().update(steer, throttle_value, break_value, gear_up, gear_down)
 
-class ArduinoStateV2(_ArduinoState):
+class ArduinoStateV2(ArduinoStateBase):
     def update_from_line(self, line):
         return super().update_from_line(line)

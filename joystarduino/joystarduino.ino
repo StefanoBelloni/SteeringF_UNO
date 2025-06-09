@@ -24,6 +24,10 @@
 #define PIN_GAS_INPUT A2
 #define PIN_BREAK_INPUT A1
 
+#define SEPARATOR()   Serial.print(';')
+#define END_OF_LINE() Serial.print('\n')
+
+
 // the setup routine runs once when you press reset:
 void setup() {
   // initialize serial communication at 9600 bits per second:
@@ -39,27 +43,27 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
 
-  uint32_t steer      = analogRead(PIN_WHEEL_INPUT);
-  uint32_t breakpedal = analogRead(PIN_BREAK_INPUT);
-  uint32_t throttle   = analogRead(PIN_GAS_INPUT);
-  uint32_t gear_up    = digitalRead(PIN_BTN_GEAR);
+  uint32_t steer      = analogRead(PIN_WHEEL_INPUT  );
+  uint32_t breakpedal = analogRead(PIN_BREAK_INPUT  );
+  uint32_t throttle   = analogRead(PIN_GAS_INPUT    );
+  uint32_t gear_up    = digitalRead(PIN_BTN_GEAR    );
   uint32_t gear_down  = digitalRead(PIN_BTN_GEAR_MIN);
 #if VERSION == 2
-  uint32_t left_btn   = digitalRead(PIN_BTN_LEFT);
-  uint32_t right_btn  = digitalRead(PIN_BTN_RIGHT);
+  uint32_t left_btn   = digitalRead(PIN_BTN_LEFT    );
+  uint32_t right_btn  = digitalRead(PIN_BTN_RIGHT   );
 #endif
 
-  Serial.print(steer);       Serial.print(';');
-  Serial.print(breakpedal);  Serial.print(';');
-  Serial.print(throttle);    Serial.print(';');
-  Serial.print(gear_up);     Serial.print(';');
+  Serial.print(steer);       SEPARATOR();
+  Serial.print(breakpedal);  SEPARATOR();
+  Serial.print(throttle);    SEPARATOR();
+  Serial.print(gear_up);     SEPARATOR();
   Serial.print(gear_down);   
   #if VERSION == 2
-                             Serial.print(';'); 
-  Serial.print(right_btn);   Serial.print(';');
+                             SEPARATOR();
+  Serial.print(right_btn);   SEPARATOR();
   Serial.print(left_btn);    
   #endif
-                             Serial.print('\n');
+                             END_OF_LINE();
   delay(10);  // delay in between reads for stability
 
 }

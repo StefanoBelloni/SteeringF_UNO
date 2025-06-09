@@ -2,7 +2,7 @@ import unittest
 import os
 import tempfile
 
-from virtual_steering_wheel.joystick.arduino_state import ArduinoStateV2
+from virtual_steering_wheel.joystick.arduino_state import ArduinoStateV1, ArduinoStateV2
 
 class TestArduinoState(unittest.TestCase):
 
@@ -336,6 +336,17 @@ class TestArduinoState(unittest.TestCase):
         events_expect = [
             (b'1023;0;1021;1;0;1;1', 'S:1.00(1023.00);T:1.00(1021.00);B:-0.00(0.00);A:1.00;Gu:False;Gd:True;L:False;R:False'),
             (b'0;1023;1021;1;1;1;1', 'S:-1.00(0.00);T:1.00(1021.00);B:-1.00(1023.00);A:-1.00;Gu:False;Gd:False;L:False;R:False')
+        ]
+        for line, expect in events_expect:
+            state.update_from_line(line)
+            self.assertEqual(str(state), expect)
+
+    # ======================================================================== #
+    # UPDATE version 1 with input line
+        state = ArduinoStateV1()
+        events_expect = [
+            (b'1023;0;1021;1;0', 'S:1.00(1023.00);T:1.00(1021.00);B:-0.00(0.00);A:1.00;Gu:False;Gd:True;L:False;R:False'),
+            (b'0;1023;1021;1;1', 'S:-1.00(0.00);T:1.00(1021.00);B:-1.00(1023.00);A:-1.00;Gu:False;Gd:False;L:False;R:False')
         ]
         for line, expect in events_expect:
             state.update_from_line(line)
