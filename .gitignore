@@ -1,0 +1,7 @@
+backups/
+__pycache__/
+venv/
+.coverage
+commands
+*.egg-info
+.vscode
