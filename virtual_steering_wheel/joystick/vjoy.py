@@ -52,6 +52,9 @@ class VirtualJoysticSimple:
                 print("[INFO] saving configuration: ", state.get_config())
                 state.dump_config()
                 break
+        print("[INFO] ", '=' * 90)
+        print("[INFO] |  VIRTUAL JOYSTICK RUNNING")
+        print("[INFO] ", '=' * 90)
 
     def _exec_calibration(self, direction, callback, getter):
         self._arduino_input.read_all()
@@ -150,16 +153,21 @@ class VirtualJoysticGP4(VirtualJoysticSimple):
     def name(self):
         return "GP4_JOYSTICK"
 
-def get_joystick_from_driver_version(arduino_input, filename=None, game_pad_class=vg.VX360Gamepad):
+def get_joystick_from_driver_version(arduino_input, filename=None, game_pad_class=vg.VX360Gamepad, timeout=0):
     # at the moment arduino starts sending data without comunicating the version:
     # this can just be extracted from the form of the input.
-    _ = arduino_input.read_all()
-    check_line = arduino_input.readline()
-    tokens = check_line.decode('ascii').strip().split(';')
-    if len(tokens) == 5:
-        return VirtualJoysticSimple(arduino_input, ArduinoStateV1, game_pad_class=game_pad_class, filenameconfig=filename)
-    elif len(tokens) == 7:
-        return VirtualJoysticGP4(arduino_input, game_pad_class=game_pad_class, filenameconfig=filename)
-    else:
-        raise RuntimeError(f"[ERROR] invalid message from serial input: {check_line}")
+    attempts = 0
+    for _ in range(timeout + 1):
+        _ = arduino_input.read_all()
+        check_line = arduino_input.readline()
+        tokens = check_line.decode('ascii').strip().split(';')
+        if len(tokens) == 5:
+            return VirtualJoysticSimple(arduino_input, ArduinoStateV1, game_pad_class=game_pad_class, filenameconfig=filename)
+        elif len(tokens) == 7:
+            return VirtualJoysticGP4(arduino_input, game_pad_class=game_pad_class, filenameconfig=filename)
+        else:
+            if attempts > timeout:
+                break
+        attempts += 1
+    raise RuntimeError(f"[ERROR] invalid message from serial input: {check_line}")
 

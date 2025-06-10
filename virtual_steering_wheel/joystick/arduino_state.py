@@ -3,7 +3,7 @@ import traceback
 
 
 class LIMITS:
-    LIMIT_ACC = 0.4
+    LIMIT_ACC = 0.05
 
 class _RangeAnalogInput:
     def __init__(self):

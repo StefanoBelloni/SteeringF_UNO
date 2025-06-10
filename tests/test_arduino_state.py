@@ -2,7 +2,7 @@ import unittest
 import os
 import tempfile
 
-from virtual_steering_wheel.joystick.arduino_state import ArduinoStateV1, ArduinoStateV2
+from virtual_steering_wheel.joystick.arduino_state import LIMITS, ArduinoStateV1, ArduinoStateV2
 
 class TestArduinoState(unittest.TestCase):
 
@@ -256,9 +256,9 @@ class TestArduinoState(unittest.TestCase):
 
     def test_update_acceleration_between_limits(self):
         state = ArduinoStateV2()
-        state.update(0, 0, 0.3, 1, 1)
+        state.update(0, 0, LIMITS.LIMIT_ACC, 1, 1)
         self.assertAlmostEqual(state.get_acceleration(), 0.0, delta=self.ERROR_DELTA)
-        state.update(0, 0, -0.3, 1, 1)
+        state.update(0, 0, -LIMITS.LIMIT_ACC, 1, 1)
         self.assertAlmostEqual(state.get_acceleration(), 0.0, delta=self.ERROR_DELTA)
 
     def test_update_acceleration_above_max(self):

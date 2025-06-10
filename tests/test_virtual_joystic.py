@@ -31,7 +31,7 @@ class TestVirtualJoystick(unittest.TestCase):
     def test_create_joystick(self):
         arduino_v1 = SerialMock(lines=[b'432;42;43;0;1'])
         arduino_v2 = SerialMock(lines=[b'432;42;43;0;1;0;1'])
-        arduino_invalid = SerialMock(lines=[b'432;42;1'])
+        arduino_invalid = SerialMock(lines=[b'432;42;1'] * 10)
         joystic_v1 = get_joystick_from_driver_version(arduino_v1, game_pad_class=GamePadMock)
         joystic_v2 = get_joystick_from_driver_version(arduino_v2, game_pad_class=GamePadMock)
         self.assertEqual(joystic_v1.name(), 'SIMPLE_JOYSTICK')
