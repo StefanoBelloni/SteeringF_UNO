@@ -131,7 +131,7 @@ class TestArduinoState(unittest.TestCase):
         m, M = self.get_numeric_range(state, 'get_steer_range')
         state.update((m + M) // 2, 0, 0, 1, 1)
         self.assertEqual(state.get_raw_steer(), (m + M) // 2)
-        self.assertAlmostEquals(state.get_steer(), 0.0, delta=self.ERROR_DELTA)
+        self.assertAlmostEqual(state.get_steer(), 0.0, delta=self.ERROR_DELTA)
 
     def test_update_steering_left_shifted_range_below_min(self):
         state = ArduinoStateV2()
@@ -153,7 +153,7 @@ class TestArduinoState(unittest.TestCase):
         m, M = self.get_numeric_range(state, 'get_steer_range')
         state.update((m + M) // 2, 0, 0, 1, 1)
         self.assertEqual(state.get_raw_steer(), (m + M) // 2)
-        self.assertAlmostEquals(state.get_steer(), 0.0, delta=self.ERROR_DELTA)
+        self.assertAlmostEqual(state.get_steer(), 0.0, delta=self.ERROR_DELTA)
 
     # ======================================================================== #
     # THROTTLE

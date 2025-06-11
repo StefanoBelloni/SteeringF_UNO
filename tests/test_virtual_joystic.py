@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+import os
 
 from virtual_steering_wheel.joystick.vjoy import get_joystick_from_driver_version
 
@@ -106,7 +107,8 @@ class TestVirtualJoystick(unittest.TestCase):
         joystick.calibrate()
 
     def test_calibrate_v2_save_config(self):
-        with tempfile.NamedTemporaryFile() as fp:
+        try:
+            fp = tempfile.NamedTemporaryFile(delete=False)
             arduino_v2 = SerialMock(lines=self._get_calibration_sequence())
             # ------------------------ #
             # finish calibration
@@ -127,6 +129,9 @@ class TestVirtualJoystick(unittest.TestCase):
             joystick_restored = get_joystick_from_driver_version(arduino_restored, filename=fp.name, game_pad_class=GamePadMock)
             joystick_restored.load_configuration()
             self.assertEqual(str(joystick_restored), expected_joystick_info)
+        finally:
+            fp.close()
+            os.remove(fp.name)
 
     def test_joystick_update_with_invalid_input(self):
         arduino_v2 = SerialMock(lines=self._get_calibration_sequence() + [b'9   ;2  ;12;0;1;1;1', b'this is not a valid input'])

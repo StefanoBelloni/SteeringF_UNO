@@ -6,7 +6,10 @@ setup(
     author='bell',
     author_email='bell@bell',
     description='Implementation of virtual Steering Wheel',
-    packages=find_packages(),    
+    packages=[
+        "virtual_steering_wheel",
+        "virtual_steering_wheel.joystick"
+        ],    
     install_requires=[
         'libevdev>=0.11',
         'pyserial>=3.5',

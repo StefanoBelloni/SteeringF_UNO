@@ -5,3 +5,4 @@ venv/
 commands
 *.egg-info
 .vscode
+build/
