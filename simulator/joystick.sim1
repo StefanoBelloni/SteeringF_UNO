@@ -1,0 +1,83 @@
+<circuit version="1.1.0-SR0" rev="1917" stepSize="1000000" stepsPS="500000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="Subcircuit" CircId="Uno-19" mainComp="false" Show_id="true" Show_Val="false" Pos="-492,-112" rotation="0" hflip="1" vflip="1" label="Arduino UNO" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
+<mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Program="joystarduino.hex" Auto_Load="false" saveEepr="true" SerialMon="1" />
+</item>
+
+<item itemtype="Potentiometer" CircId="Potentiometer-27" mainComp="false" ShowProp="Resistance" Show_id="true" Show_Val="true" Pos="-172,-172" rotation="90" hflip="1" vflip="1" label="Break Pedal" idLabPos="-22.4929,-46.4929" labelrot="0" valLabPos="15,-20" valLabRot="0" Resistance="10 kΩ" Value_Ohm="1620 Ω" Slider="false" Scale="1" />
+
+<item itemtype="Potentiometer" CircId="Potentiometer-28" mainComp="false" ShowProp="Resistance" Show_id="true" Show_Val="true" Pos="-172,-112" rotation="90" hflip="1" vflip="1" label="Throttle Pedal" idLabPos="-22.4929,-44.8697" labelrot="0" valLabPos="15,-20" valLabRot="0" Resistance="10 kΩ" Value_Ohm="9330 Ω" Slider="false" Scale="1" />
+
+<item itemtype="Potentiometer" CircId="Potentiometer-29" mainComp="false" ShowProp="Resistance" Show_id="true" Show_Val="true" Pos="-172,-36" rotation="90" hflip="1" vflip="1" label="Steering Wheel" idLabPos="-25.1982,-45.9518" labelrot="0" valLabPos="15,-20" valLabRot="0" Resistance="10 kΩ" Value_Ohm="6180 Ω" Slider="false" Scale="1" />
+
+<item itemtype="Push" CircId="Push-39" mainComp="false" Show_id="true" Show_Val="false" Pos="-584,-184" rotation="0" hflip="1" vflip="1" label="Gear Down" idLabPos="-21.4107,21.4502" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Push" CircId="Push-40" mainComp="false" Show_id="true" Show_Val="false" Pos="-528,-188" rotation="0" hflip="1" vflip="1" label="Gear Up" idLabPos="-13.2946,24.6966" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Push" CircId="Push-41" mainComp="false" Show_id="true" Show_Val="false" Pos="-532,-20" rotation="-180" hflip="1" vflip="1" label="Btn Right" idLabPos="19.1698,-13.1785" labelrot="180" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Push" CircId="Push-42" mainComp="false" Show_id="true" Show_Val="false" Pos="-584,-20" rotation="-180" hflip="1" vflip="1" label="Btn Left" idLabPos="17.0055,-12.0964" labelrot="180" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Node" CircId="Node-31" mainComp="false" Pos="-304,-128" />
+
+<item itemtype="Node" CircId="Node-32" mainComp="false" Pos="-304,-72" />
+
+<item itemtype="Node" CircId="Node-33" mainComp="false" Pos="-232,20" />
+
+<item itemtype="Node" CircId="Node-34" mainComp="false" Pos="-232,-96" />
+
+<item itemtype="Node" CircId="Node-45" mainComp="false" Pos="-608,-184" />
+
+<item itemtype="Node" CircId="Node-48" mainComp="false" Pos="-608,-16" />
+
+<item itemtype="Node" CircId="Node-49" mainComp="false" Pos="-556,24" />
+
+<item itemtype="Connector" uid="Connector-63" startpinid="Potentiometer-29-PinA" endpinid="Node-32-1" pointList="-172,-52,-304,-52,-304,-72" />
+
+<item itemtype="Connector" uid="Connector-65" startpinid="Node-32-2" endpinid="Node-31-0" pointList="-304,-72,-304,-128" />
+
+<item itemtype="Connector" uid="Connector-69" startpinid="Node-33-2" endpinid="Potentiometer-29-PinB" pointList="-232,20,-172,20,-172,-20" />
+
+<item itemtype="Connector" uid="Connector-70" startpinid="Node-34-1" endpinid="Potentiometer-27-PinB" pointList="-232,-96,-232,-156,-172,-156" />
+
+<item itemtype="Connector" uid="Connector-71" startpinid="Potentiometer-28-PinB" endpinid="Node-34-0" pointList="-172,-96,-232,-96" />
+
+<item itemtype="Connector" uid="Connector-83" startpinid="Uno-19-5V0" endpinid="Node-32-0" pointList="-340,-16,-304,-16,-304,-72" />
+
+<item itemtype="Connector" uid="Connector-60" startpinid="Potentiometer-28-PinA" endpinid="Node-31-1" pointList="-172,-128,-304,-128" />
+
+<item itemtype="Connector" uid="Connector-105" startpinid="Node-34-2" endpinid="Node-33-1" pointList="-232,-96,-232,20" />
+
+<item itemtype="Connector" uid="Connector-109" startpinid="Uno-19-A2" endpinid="Potentiometer-27-PinM" pointList="-340,-72,-324,-72,-324,-172,-188,-172" />
+
+<item itemtype="Connector" uid="Connector-114" startpinid="Node-31-2" endpinid="Potentiometer-27-PinA" pointList="-304,-128,-304,-188,-172,-188" />
+
+<item itemtype="Connector" uid="Connector-130" startpinid="Node-45-1" endpinid="Push-40-pinP0" pointList="-608,-184,-608,-216,-544,-216,-544,-188" />
+
+<item itemtype="Connector" uid="Connector-132" startpinid="Node-45-2" endpinid="Push-39-pinP0" pointList="-608,-184,-600,-184" />
+
+<item itemtype="Connector" uid="Connector-147" startpinid="Push-42-switch0pinN" endpinid="Node-48-1" pointList="-600,-20,-608,-20,-608,-16" />
+
+<item itemtype="Connector" uid="Connector-149" startpinid="Node-48-2" endpinid="Node-45-0" pointList="-608,-16,-608,-184" />
+
+<item itemtype="Connector" uid="Connector-150" startpinid="Push-41-switch0pinN" endpinid="Node-49-1" pointList="-548,-20,-556,-20,-556,24" />
+
+<item itemtype="Connector" uid="Connector-151" startpinid="Uno-19-GND2" endpinid="Node-49-0" pointList="-484,24,-556,24" />
+
+<item itemtype="Connector" uid="Connector-152" startpinid="Node-49-2" endpinid="Node-48-0" pointList="-556,24,-608,24,-608,-16" />
+
+<item itemtype="Connector" uid="Connector-159" startpinid="Push-39-switch0pinN" endpinid="Uno-19-2" pointList="-568,-184,-552,-184,-552,-80,-484,-80" />
+
+<item itemtype="Connector" uid="Connector-160" startpinid="Push-40-switch0pinN" endpinid="Uno-19-3" pointList="-512,-188,-500,-188,-500,-72,-484,-72" />
+
+<item itemtype="Connector" uid="Connector-161" startpinid="Push-41-pinP0" endpinid="Uno-19-4" pointList="-516,-20,-516,-64,-484,-64" />
+
+<item itemtype="Connector" uid="Connector-162" startpinid="Push-42-pinP0" endpinid="Uno-19-5" pointList="-568,-20,-568,-56,-484,-56" />
+
+<item itemtype="Connector" uid="Connector-74" startpinid="Uno-19-A1" endpinid="Potentiometer-28-PinM" pointList="-340,-64,-316,-64,-316,-112,-188,-112" />
+
+<item itemtype="Connector" uid="Connector-104" startpinid="Uno-19-GND1" endpinid="Node-33-0" pointList="-340,-24,-232,-24,-232,20" />
+
+<item itemtype="Connector" uid="Connector-163" startpinid="Uno-19-A0" endpinid="Potentiometer-29-PinM" pointList="-340,-56,-316,-56,-316,-36,-188,-36" />
+
+</circuit>

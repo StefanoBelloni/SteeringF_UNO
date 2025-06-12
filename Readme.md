@@ -19,15 +19,54 @@ In what follow we are going to describe them in detail.
  
 ## Components
 
-[FreeCAD](https://www.freecad.org/) has been used to design the The Steering Wheel 3D model.
+### Material
 
-<img src="./3Dprinter/back_steering_wheel.png" width="400" /> <img src="./3Dprinter/front_steering_wheel.png" width="490" />
+#### Steering Wheel and Pedals
 
-<img src="./3Dprinter/pedal.png" width="400" />
-
-The _FCStd_ file is in the directoy `./3Dprinter/freeCAD_models`
+For the steering wheel and the pedal, you need to print the models:
 
 
+* [FreeCAD](https://www.freecad.org/) has been used to design the The Steering Wheel 3D model.
+
+<img src="./images/back_steering_wheel.png" width="400" /> <img src="./images/front_steering_wheel.png" width="490" />
+
+<img src="./images/pedal.png" width="400" />
+
+* The _FCStd_ file is in the directoy `./3Dprinter/freeCAD_models`
+
+In order to assemble it, one needs:
+* 6 screw `M3x20mm` with a exagonal nut of `6mm`
+* 6 springs from clothespin: they are used for the gear (2) and the pedals ( 2 for each)
+
+
+#### Electronic coomponents
+The electronic component consists of only few parts
+* Arduino UNO
+* 2 potentiometer [Alpha RV16AF-20-15K-B10K RV16AF20KB10KM](https://www.conrad.de/de/p/alpha-rv16af-20-15k-b10k-rv16af20kb10km-dreh-potentiometer-mono-200-mw-10-k-1-st-1694304.html?gid=371931&mid=11354&awinaffid=515769&linkid=3411712&utm_source=awin&utm_medium=cpo&utm_content=css&utm_campaign=515769&gad_source=1&gad_campaignid=22426608696&gclid=EAIaIQobChMI7v2trObsjQMV4ZeDBx2Azi2ZEAQYASABEgIFpfD_BwE&refresh=true) for the pedals
+      _NOTE_: If you use another type of potentiometer, you need to redesign the pedals
+* 1 potentiometer [Weltron 002045038792 WP20CS-08-60F1-10K-20%-LIN](https://www.conrad.de/de/p/weltron-002045038792-wp20cs-08-60f1-10k-20-lin-dreh-potentiometer-mono-0-4-w-10-k-1-st-440891.html) for the steering wheel
+* At least 2 buttons [C-TS695 TC-TS695](https://www.conrad.de/de/p/tru-components-tc-ts695-tc-ts695-drucktaster-12-v-dc-tastend-1-st-1589390.html?gid=371931&mid=11354&awinaffid=515769&linkid=3411712&utm_source=awin&utm_medium=cpo&utm_content=css&utm_campaign=515769&gad_source=1&gad_campaignid=22426608696&gclid=EAIaIQobChMI0MWul-jsjQMV752DBx3yMi1FEAQYBSABEgKPOPD_BwE) for the gear up, gear down.
+There are two optional buttons.
+      _NOTE_: If you use another type of buttons, you need to redesign thehols for them
+* wires
+
+
+### Cicuit
+
+The cicuit is extremly simple:
+<img src="./images/joystick_circuit.png" width="400" />
+* schema and simulation done with [slimul IDE](https://simulide.com/p/) (`simulator/joystick.sim1`)
+<img src="./images/simulation_circuit_simulIDE.webm" width="400" />
+
+It consists of just few parts:
+* 4 buttons
+    * 2 buttons are used to control the gears (UP/DOWN)
+    * 2 buttons can be customize
+* 3 potentiometers
+    * 2 are for the pedals
+    * 1 to decode the rotation of the steering wheel
+
+For the Arduino code see section **Software: Arduino**
 
 --- 
 

@@ -6,3 +6,4 @@ commands
 *.egg-info
 .vscode
 build/
+simulator/joystarduino.hex

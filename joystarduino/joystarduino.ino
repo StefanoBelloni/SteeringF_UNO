@@ -12,8 +12,8 @@
 
 #define VERSION  2
 
-#define PIN_BTN_GEAR 2
-#define PIN_BTN_GEAR_MIN 3
+#define PIN_BTN_GEAR_UP 2
+#define PIN_BTN_GEAR_DOWN 3
 
 #if VERSION == 2
 #   define PIN_BTN_RIGHT 4
@@ -32,8 +32,8 @@
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
-  pinMode(PIN_BTN_GEAR, INPUT_PULLUP);
-  pinMode(PIN_BTN_GEAR_MIN, INPUT_PULLUP);
+  pinMode(PIN_BTN_GEAR_UP, INPUT_PULLUP);
+  pinMode(PIN_BTN_GEAR_DOWN, INPUT_PULLUP);
 #if VERSION == 2
   pinMode(PIN_BTN_RIGHT, INPUT_PULLUP);
   pinMode(PIN_BTN_LEFT, INPUT_PULLUP);
@@ -43,11 +43,11 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
 
-  uint32_t steer      = analogRead(PIN_WHEEL_INPUT  );
-  uint32_t breakpedal = analogRead(PIN_BREAK_INPUT  );
-  uint32_t throttle   = analogRead(PIN_GAS_INPUT    );
-  uint32_t gear_up    = digitalRead(PIN_BTN_GEAR    );
-  uint32_t gear_down  = digitalRead(PIN_BTN_GEAR_MIN);
+  uint32_t steer      = analogRead(PIN_WHEEL_INPUT   );
+  uint32_t breakpedal = analogRead(PIN_BREAK_INPUT   );
+  uint32_t throttle   = analogRead(PIN_GAS_INPUT     );
+  uint32_t gear_up    = digitalRead(PIN_BTN_GEAR_UP  );
+  uint32_t gear_down  = digitalRead(PIN_BTN_GEAR_DOWN);
 #if VERSION == 2
   uint32_t left_btn   = digitalRead(PIN_BTN_LEFT    );
   uint32_t right_btn  = digitalRead(PIN_BTN_RIGHT   );
