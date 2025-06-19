@@ -15,6 +15,11 @@ The Game Steering Wheel consists of three main parts:
 * throttle and break pedals
 * python driver
 
+<img src="./images/steering_front.jpg" width="300" /> <img src="./images/steering_back.jpg" width="300" />
+
+<img src="./images/pedals.jpg" width="300" /> <img src="./images/pedal_mov.gif" width="300" />
+
+
 In what follow we are going to describe them in detail.
  
 ## Components
@@ -105,12 +110,19 @@ There are two type of messages:
 
 #### Python Driver
 
---- 
+The python driver has 3 component:
+* the [runner](virtual_steering_wheel/joystick/runner.py): it identifies the message version and create the corresponding `VirtualJoystic<...>`-object
+* The [VirtualJoysticks](virtual_steering_wheel/joystick/vjoy.py):
+   * `VirtualJoysticSimple`: minimal joystick with two button (message **version 1**)
+   * `VirtualJoysticGP4`: joystick with 4 button (message **version 2**) - the 
+        On linux only `GAMEPAD_A` and `GAMEPAD_B` seems to be working: 
+        in GP4 keys `x`, `c` are used to look left/right: This joystick simulates these key press with the 2 extra buttons with help of the library `pyautogui`.
+* The [ArduinoStateVn](virtual_steering_wheel/joystick/arduino_state.py) store the input from arduino and update the state of the joystick depending of the message version `ArduinoStateV1`, `ArduinoStateV2`
 
-#### TODO
+##### Calibration
 
-* [ ] sofware
-    * [ ] python driver (based on `vgamepad`)
-    * [ ] calibration
-    * [x] arduino code
-* [x] tests
+In order to properly map the values of the potentiometer to proper ranges, the `serial joystick` needs to be calibrated. 
+
+<img src="./images/calibration_joystick.webm" width="400" />
+
+At the end of the calibation the ranges can be saved into a file (default is `os.path.expanduser('~/.joystic_configuration')`)

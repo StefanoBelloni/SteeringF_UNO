@@ -58,7 +58,7 @@ def main():
             print("[INFO] -----------------------------------------------------")
             print("[INFO] USEFUL COMMANDS")
             print("[INFO]   # run 'sudo chmod +0666 /dev/uinput' to activate")
-            print("[INFO]   # run 'jstest-gtk' to confugure")
+            print("[INFO]   # run 'jstest-gtk' to configure")
             print("[INFO] -----------------------------------------------------")
 
 
