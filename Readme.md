@@ -8,7 +8,7 @@ The idea was to have a minimal (easy and cheap) Game Steering Wheel mainly to pl
 The steering wheel and pedals are based on three potentiometers that are used to
 encode their postition and angle.
 For the comunication with the computer it uses (for now) an **Arduino UNO**, so only
-the a serial comunication is available.
+the a serial comunication is available: to simulate a joystick the library [vgamepad](https://pypi.org/project/vgamepad/) is used.
 
 The Game Steering Wheel consists of three main parts:
 * steering wheel
@@ -47,7 +47,7 @@ The electronic component consists of only few parts
 * 1 potentiometer [Weltron 002045038792 WP20CS-08-60F1-10K-20%-LIN](https://www.conrad.de/de/p/weltron-002045038792-wp20cs-08-60f1-10k-20-lin-dreh-potentiometer-mono-0-4-w-10-k-1-st-440891.html) for the steering wheel
 * At least 2 buttons [C-TS695 TC-TS695](https://www.conrad.de/de/p/tru-components-tc-ts695-tc-ts695-drucktaster-12-v-dc-tastend-1-st-1589390.html?gid=371931&mid=11354&awinaffid=515769&linkid=3411712&utm_source=awin&utm_medium=cpo&utm_content=css&utm_campaign=515769&gad_source=1&gad_campaignid=22426608696&gclid=EAIaIQobChMI0MWul-jsjQMV752DBx3yMi1FEAQYBSABEgKPOPD_BwE) for the gear up, gear down.
 There are two optional buttons.
-      _NOTE_: If you use another type of buttons, you need to redesign thehols for them
+      _NOTE_: If you use another type of buttons, you need to redesign the holes for them
 * wires
 
 
@@ -65,22 +65,52 @@ It consists of just few parts:
 * 3 potentiometers
     * 2 are for the pedals
     * 1 to decode the rotation of the steering wheel
+* [Arduino UNO](https://docs.arduino.cc/hardware/uno-rev3/): for the Arduino code see section **Software: Arduino**
 
-For the Arduino code see section **Software: Arduino**
+### Software
+
+The software consists of two main parts: Arduino and python driver.
+
+#### Arduino
+
+The [arduino sketch](./joystarduino/joystarduino.ino) is extremly simple: it just read the input from the
+different pins where potentiometers and buttons are connected and serialize them
+to the python driver via the serial port: it is just `;`-separated line of the
+different values in a specific order.
+There are two type of messages:
+* **version 1** consist of only 5 values:
+
+|Position | Component          |  Type   | pin                |
+|:-------:|:-------------------|:-------:|-------------------:|
+|1        | steering wheel     | analog  | `PIN_WHEEL_INPUT`  |
+|2        | break pedal        | analog  | `PIN_BREAK_INPUT`  |
+|3        | throttle pedal     | analog  | `PIN_GAS_INPUT`    |
+|4        | right back button  | digital | `PIN_BTN_GEAR_UP`  |
+|5        | left back button   | digital | `PIN_BTN_GEAR_DOWN`|
+
+* **version 2** (`#define VERSION  2`) consist of 2 extra-values:
+
+|Position | Component          |  Type   | pin                |
+|:-------:|:-------------------|:-------:|-------------------:|
+|1        | steering wheel     | analog  | `PIN_WHEEL_INPUT`  |
+|2        | break pedal        | analog  | `PIN_BREAK_INPUT`  |
+|3        | throttle pedal     | analog  | `PIN_GAS_INPUT`    |
+|4        | right back button  | digital | `PIN_BTN_GEAR_UP`  |
+|5        | left back button   | digital | `PIN_BTN_GEAR_DOWN`|
+|6        | left front button  | digital | `PIN_BTN_LEFT`     |
+|7        | right front button | digital | `PIN_BTN_RIGHT`    |
+
+**NOTE:**  that the Button are initilized in the `pinMode` `INPUT_PULLUP`, so a button press is read as a `LOW` signal, while the button not being pressed is read as `HIGH`.
+
+
+#### Python Driver
 
 --- 
 
 #### TODO
 
-* [ ] electronics
-    * [ ] potentiometer
-    * [ ] buttons
-    * [ ] connections
-* [ ] mechanics
-    * [ ] steering wheel
-    * [ ] pedal
 * [ ] sofware
     * [ ] python driver (based on `vgamepad`)
     * [ ] calibration
-    * [ ] arduino code
-* [ ] tests
+    * [x] arduino code
+* [x] tests

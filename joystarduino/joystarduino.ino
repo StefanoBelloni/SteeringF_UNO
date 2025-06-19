@@ -12,12 +12,12 @@
 
 #define VERSION  2
 
-#define PIN_BTN_GEAR_UP 2
-#define PIN_BTN_GEAR_DOWN 3
+#define PIN_BTN_GEAR_UP   6
+#define PIN_BTN_GEAR_DOWN 2
 
 #if VERSION == 2
-#   define PIN_BTN_RIGHT 4
-#   define PIN_BTN_LEFT  5
+#   define PIN_BTN_RIGHT 3
+#   define PIN_BTN_LEFT  4
 #endif
 
 #define PIN_WHEEL_INPUT A0
