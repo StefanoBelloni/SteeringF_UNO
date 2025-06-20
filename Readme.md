@@ -60,8 +60,6 @@ There are two optional buttons.
 
 The cicuit is extremly simple:
 <img src="./images/joystick_circuit.png" width="400" />
-* schema and simulation done with [slimul IDE](https://simulide.com/p/) (`simulator/joystick.sim1`)
-<img src="./images/simulation_circuit_simulIDE.webm" width="400" />
 
 It consists of just few parts:
 * 4 buttons
@@ -71,6 +69,9 @@ It consists of just few parts:
     * 2 are for the pedals
     * 1 to decode the rotation of the steering wheel
 * [Arduino UNO](https://docs.arduino.cc/hardware/uno-rev3/): for the Arduino code see section **Software: Arduino**
+
+* schema and simulation done with [slimul IDE](https://simulide.com/p/) (`simulator/joystick.sim1`)
+<img src="./images/simulation_circuit_simulIDE.gif" width="400" />
 
 ### Software
 
@@ -123,6 +124,6 @@ The python driver has 3 component:
 
 In order to properly map the values of the potentiometer to proper ranges, the `serial joystick` needs to be calibrated. 
 
-<img src="./images/calibration_joystick.webm" width="400" />
+<img src="./images/calibration_joystick.gif" width="400" />
 
 At the end of the calibation the ranges can be saved into a file (default is `os.path.expanduser('~/.joystic_configuration')`)
